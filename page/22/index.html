@@ -577,6 +577,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://mtmatt.one/apcs/apcspracticaltest/cpp-apcs-2017-3-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="mtmatt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="mtmatt">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/apcs/apcspracticaltest/cpp-apcs-2017-3-3/" class="post-title-link" itemprop="url">C++ APCS實作題 2017/3 3 : 數字龍捲風</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-19 08:00:00" itemprop="dateCreated datePublished" datetime="2021-03-19T08:00:00+08:00">2021-03-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/apcs/" itemprop="url" rel="index"><span itemprop="name">apcs</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/apcs/apcspracticaltest/" itemprop="url" rel="index"><span itemprop="name">apcspracticaltest</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="題目連結：c292-APCS2017-0304-3數字龍捲風-高中生程式解題系統"><a href="#題目連結：c292-APCS2017-0304-3數字龍捲風-高中生程式解題系統" class="headerlink" title="題目連結：c292. APCS2017-0304-3數字龍捲風 - 高中生程式解題系統"></a>題目連結：<a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c292">c292. APCS2017-0304-3數字龍捲風 - 高中生程式解題系統</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> map[<span class="number">101</span>][<span class="number">101</span>];</span><br><span class="line"><span class="type">bool</span> visit[<span class="number">101</span>][<span class="number">101</span>]=&#123;<span class="literal">false</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,r;</span><br><span class="line">    std::cin&gt;&gt;n&gt;&gt;r;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">            std::cin&gt;&gt;map[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> row=n/<span class="number">2</span>,col=n/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n*n;i++)&#123;</span><br><span class="line">        visit[row][col]=<span class="literal">true</span>;</span><br><span class="line">        std::cout&lt;&lt;map[row][col];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(r)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="comment">//left</span></span><br><span class="line">                col--;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row<span class="number">-1</span>][col])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="comment">//up</span></span><br><span class="line">                row--;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row][col+<span class="number">1</span>])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="comment">//right</span></span><br><span class="line">                col++;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row+<span class="number">1</span>][col])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line"><span class="comment">//down</span></span><br><span class="line">                row++;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row][col<span class="number">-1</span>])&#123;</span><br><span class="line">                    r=<span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/apcs/apcspracticaltest/cpp-apcs-2017-3-3/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://mtmatt.one/apcs/apcspracticaltest/cpp-apcs-2021-1-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -647,98 +739,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/apcs/apcspracticaltest/cpp-apcs-2021-1-4/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://mtmatt.one/apcs/apcspracticaltest/cpp-apcs-2017-3-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="mtmatt">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="mtmatt">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/apcs/apcspracticaltest/cpp-apcs-2017-3-3/" class="post-title-link" itemprop="url">C++ APCS實作題 2017/3 3 : 數字龍捲風</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-03-19 08:00:00" itemprop="dateCreated datePublished" datetime="2021-03-19T08:00:00+08:00">2021-03-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apcs/" itemprop="url" rel="index"><span itemprop="name">apcs</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apcs/apcspracticaltest/" itemprop="url" rel="index"><span itemprop="name">apcspracticaltest</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>2 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="題目連結：c292-APCS2017-0304-3數字龍捲風-高中生程式解題系統"><a href="#題目連結：c292-APCS2017-0304-3數字龍捲風-高中生程式解題系統" class="headerlink" title="題目連結：c292. APCS2017-0304-3數字龍捲風 - 高中生程式解題系統"></a>題目連結：<a target="_blank" rel="noopener" href="https://zerojudge.tw/ShowProblem?problemid=c292">c292. APCS2017-0304-3數字龍捲風 - 高中生程式解題系統</a></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> map[<span class="number">101</span>][<span class="number">101</span>];</span><br><span class="line"><span class="type">bool</span> visit[<span class="number">101</span>][<span class="number">101</span>]=&#123;<span class="literal">false</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,r;</span><br><span class="line">    std::cin&gt;&gt;n&gt;&gt;r;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;j++)&#123;</span><br><span class="line">            std::cin&gt;&gt;map[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> row=n/<span class="number">2</span>,col=n/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n*n;i++)&#123;</span><br><span class="line">        visit[row][col]=<span class="literal">true</span>;</span><br><span class="line">        std::cout&lt;&lt;map[row][col];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(r)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="comment">//left</span></span><br><span class="line">                col--;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row<span class="number">-1</span>][col])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="comment">//up</span></span><br><span class="line">                row--;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row][col+<span class="number">1</span>])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"><span class="comment">//right</span></span><br><span class="line">                col++;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row+<span class="number">1</span>][col])&#123;</span><br><span class="line">                    r++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line"><span class="comment">//down</span></span><br><span class="line">                row++;</span><br><span class="line">                <span class="keyword">if</span>(!visit[row][col<span class="number">-1</span>])&#123;</span><br><span class="line">                    r=<span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/apcs/apcspracticaltest/cpp-apcs-2017-3-3/#more" rel="contents">
                 閱讀全文 &raquo;
               </a>
             </div>
